@@ -4,27 +4,42 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform firstPersonCamera;
-    private float speed = 10f;
+    [Header("Movement")]
+    public float speed = 50f;
     public int health = 100;
+
+    Vector3 MovementDirection;
+
+    public Transform orientation;
+    Rigidbody playerRb;
+
+    [Header("Ground Check")]
+
+    public float groundDrag;
+    public float playerHeight;
+    public LayerMask whatIsGround;
+
+    bool grounded;
 
     private void Awake()
     {
-        firstPersonCamera = GetComponent<Transform>();
+
     }
 
     private void Start()
     {
-        Camera.main.transform.position = firstPersonCamera.transform.position;
+        playerRb = GetComponent<Rigidbody>();
+        playerRb.freezeRotation = true;
     }
 
     void PlayerMovement()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        transform.position = (Vector3.forward * vertical * speed * Time.deltaTime);
-        transform.position = (Vector3.right * horizontal * speed * Time.deltaTime);
+        MovementDirection = orientation.forward * vertical + orientation.right * horizontal;
+
+        playerRb.AddForce(MovementDirection.normalized * speed, ForceMode.Force);
 
     }
 
