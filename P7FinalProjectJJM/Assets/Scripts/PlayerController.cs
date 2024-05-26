@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
 
     bool grounded;
 
+
+    [Header("Weapons")]
+    GameObject[] weapons;
+
     private void Awake()
     {
 
@@ -52,7 +56,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-
+            
         }
+    }
+
+    void Inventory()
+    {
+        
     }
 }
