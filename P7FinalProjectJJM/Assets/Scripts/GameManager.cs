@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     {
         sceneManager = GameObject.Find("GameManager").GetComponent<SceneStuff>();
         pauseEmpty.SetActive(false);
+        gameOverEmpty.SetActive(false);
         gameOver = false;
     }
 
@@ -23,6 +24,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         PauseGame();
+        if(gameOver == true)
+        {
+            GameOver();
+        }
     }
 
     public void PauseGame()
@@ -46,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        gameOver = true;
-
+        gameOverEmpty.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
 }
