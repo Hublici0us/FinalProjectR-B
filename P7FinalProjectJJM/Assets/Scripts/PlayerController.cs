@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Ground Check")]
 
-    public float groundDrag;
+    public float groundDrag = 5;
     public float playerHeight;
     public LayerMask whatIsGround;
 
@@ -50,6 +50,20 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         PlayerMovement();
+    }
+
+    void Update()
+    {
+        grounded = Physics.Raycast(this.transform.position, Vector3.down, playerHeight * 0.5f + 1.5f, whatIsGround);
+
+        if (grounded)
+        {
+            playerRb.drag = groundDrag;
+        }
+        else
+        {
+            playerRb.drag = 0f;
+        }
     }
 
     void PlayerAttack()

@@ -153,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &46326751
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1153,11 +1153,11 @@ MonoBehaviour:
   speed: 25
   health: 100
   orientation: {fileID: 1919299303}
-  groundDrag: 0
-  playerHeight: 0
+  groundDrag: 5
+  playerHeight: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!54 &328697635
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14098,6 +14098,10 @@ PrefabInstance:
     - target: {fileID: 7472117429534917592, guid: e0e7694e450af95408bd8b42ded97f97, type: 3}
       propertyPath: m_Name
       value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472117429534917592, guid: e0e7694e450af95408bd8b42ded97f97, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
