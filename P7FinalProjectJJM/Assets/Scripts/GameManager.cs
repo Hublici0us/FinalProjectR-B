@@ -8,12 +8,15 @@ public class GameManager : MonoBehaviour
     private SceneStuff sceneManager;
 
     public GameObject pauseEmpty;
+    public GameObject gameOverEmpty;
+    public bool gameOver;
     
     // Start is called before the first frame update
     void Start()
     {
         sceneManager = GameObject.Find("GameManager").GetComponent<SceneStuff>();
         pauseEmpty.SetActive(false);
+        gameOver = false;
     }
 
     // Update is called once per frame
@@ -39,5 +42,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void GameOver()
+    {
+        gameOver = true;
+
     }
 }

@@ -10209,6 +10209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseEmpty: {fileID: 440368594}
+  gameOverEmpty: {fileID: 46326750}
+  gameOver: 0
 --- !u!1001 &1094611034
 PrefabInstance:
   m_ObjectHideFlags: 0
