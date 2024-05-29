@@ -20,5 +20,17 @@ public class SceneStuff : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene");
+        Time.timeScale = 1.0f;
+
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
