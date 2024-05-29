@@ -837,7 +837,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3119101837911243478, guid: 31beb3728b9b99149a0c745302e9b3cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1525261400}
   m_SourcePrefab: {fileID: 100100000, guid: 31beb3728b9b99149a0c745302e9b3cc, type: 3}
 --- !u!1 &283618091
 GameObject:
@@ -1264,11 +1267,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f2d763c09bf394b86725f3433bd089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 50
   health: 100
   orientation: {fileID: 1919299303}
-  groundDrag: 5
-  playerHeight: 2
+  groundDrag: 2
+  playerHeight: 5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -8203,6 +8206,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8823798373613713439, guid: d97d7904d19819b4fb851b0e09d538da, type: 3}
   m_PrefabInstance: {fileID: 756867802}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &757062701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3119101837911243478, guid: 31beb3728b9b99149a0c745302e9b3cc, type: 3}
+  m_PrefabInstance: {fileID: 252273088}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &772908403 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2974738851634334821, guid: a44309dec5bf61443b4bff3cefdda4e1, type: 3}
@@ -12141,6 +12149,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 281084996347074542, guid: 31beb3728b9b99149a0c745302e9b3cc, type: 3}
   m_PrefabInstance: {fileID: 252273088}
   m_PrefabAsset: {fileID: 0}
+--- !u!111 &1525261400
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757062701}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 50a636e1f120f23498c8eefa9713458a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1563688149
 PrefabInstance:
   m_ObjectHideFlags: 0

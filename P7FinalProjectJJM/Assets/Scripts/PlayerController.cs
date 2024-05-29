@@ -54,7 +54,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        grounded = Physics.Raycast(this.transform.position, Vector3.down, playerHeight * 0.5f + 1.5f, whatIsGround);
+        // ground checking: sends a raycast (invisible arrow tracker thingy) straight down from player position, if detects layer "whatIsGround" then applies drag.
+        grounded = Physics.Raycast(gameObject.transform.position, Vector3.down, playerHeight + 0.2f, whatIsGround);
 
         if (grounded)
         {
@@ -62,7 +63,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            playerRb.drag = 0f;
+            playerRb.drag = 0;
+            Physics.gravity *= 3;
         }
     }
 
