@@ -64,15 +64,11 @@ public class PlayerController : MonoBehaviour
         // ground checking: sends a raycast (invisible arrow tracker thingy) straight down from player position, if detects layer "whatIsGround" then applies drag.
         grounded = Physics.Raycast(gameObject.transform.position, Vector3.down, playerHeight + 0.2f, whatIsGround);
 
-        if (grounded)
+        if (!grounded)
         {
-            playerRb.drag = groundDrag;
+            speed /= 2;
         }
-        else
-        {
-            playerRb.drag = 0;
-            Physics.gravity *= 3;
-        }
+       
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
