@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float speed = 50f;
     public int health = 100;
-
+    public int maxHealth = 100;
+    public UnityEngine.UI.Slider healthSlider;
+    public TextMeshProUGUI healthText;
     Vector3 MovementDirection;
 
     public Transform orientation;
@@ -34,6 +39,8 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.freezeRotation = true;
+
+        SetMaxHealth();
     }
 
     void PlayerMovement()
@@ -66,6 +73,12 @@ public class PlayerController : MonoBehaviour
             playerRb.drag = 0;
             Physics.gravity *= 3;
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            health -= 20;
+        }
+        SetHealth();
     }
 
     void PlayerAttack()
@@ -76,6 +89,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetHealth()
+    {
+        healthSlider.value = health;
+        healthText.text ="" + health;
+    }
+
+    public void SetMaxHealth()
+    {
+        healthSlider.maxValue = maxHealth;
+    }
     void Inventory()
     {
         
