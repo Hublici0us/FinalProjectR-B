@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     [Header("Weapons")]
     GameObject[] weapons;
 
+    private GameManager gameManager;
+
     private void Awake()
     {
 
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.freezeRotation = true;
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         SetMaxHealth();
     }
 
@@ -75,6 +77,11 @@ public class PlayerController : MonoBehaviour
             health -= 20;
         }
         SetHealth();
+
+        if(health <= 0)
+        {
+            gameManager.gameOver = true;
+        }
     }
 
     void PlayerAttack()

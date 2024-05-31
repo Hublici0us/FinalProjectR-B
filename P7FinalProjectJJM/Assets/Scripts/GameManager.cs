@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
+
+        if(gameOver == false)
+        {
+            Time.timeScale = 1.0f;
+        }
     }
 
     public void PauseGame()
@@ -53,5 +58,6 @@ public class GameManager : MonoBehaviour
     {
         gameOverEmpty.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
     }
 }
