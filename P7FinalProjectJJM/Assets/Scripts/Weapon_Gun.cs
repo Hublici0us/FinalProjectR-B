@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Weapon_Gun : MonoBehaviour
 {
-
+    public float bulletSpeed;
     public float damage;
-    public GameObject bullet;
+    public Rigidbody bullet;
+    public GameObject gun;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,9 @@ public class Weapon_Gun : MonoBehaviour
 
     public void ShootBullet()
     {
-        Instantiate(bullet);
+        Rigidbody bulletRb;
+        bulletRb = Instantiate(bullet, gun.transform.position, gun.transform.rotation) as Rigidbody;
+        bulletRb.transform.Translate(Vector3.forward * bulletSpeed);
     }
 
 

@@ -7,13 +7,23 @@ public class GameManager : MonoBehaviour
 {
     private SceneStuff sceneManager;
 
+    PlayerController playerController;
+
+    [Header("UI")]
     public GameObject pauseEmpty;
     public GameObject gameOverEmpty;
+    public GameObject evolutionPanel;
     public bool gameOver;
+
+
+    [Header("Enemy Related")]
+    public GameObject[] enemies;
+    private int enemiesToSpawn = 5;
     
     // Start is called before the first frame update
     void Start()
     {
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         sceneManager = GameObject.Find("GameManager").GetComponent<SceneStuff>();
         pauseEmpty.SetActive(false);
         gameOverEmpty.SetActive(false);
@@ -59,5 +69,34 @@ public class GameManager : MonoBehaviour
         gameOverEmpty.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
+    }
+
+    IEnumerator EnemySpawner()
+    {
+        while (true)
+        {
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
+                SpawnEnemies();
+                yield return new WaitForSeconds(1f);
+            }
+
+            evolutionPanel.SetActive(true );
+
+
+        }
+    }
+
+    void SpawnEnemies()
+    {
+        int enemyIndex = Random.Range(0, enemies.Length);
+
+      //  Instantiate(enemies[enemyIndex], Vector3.zero, Quaternion.identity);
+    }
+
+    public void UpdateHealthUI()
+    {
+        playerController.healthSlider.value = playerController.health;
+        playerController.healthText.text = ($"{playerController.health}");
     }
 }
