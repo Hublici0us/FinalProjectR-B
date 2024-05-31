@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 50f;
     public int health = 100;
     public int maxHealth = 100;
+    public int healthRegen = 1;
+    public int timeSinceDamage = 0;
+    private float regenCoolDown = 3;
     Vector3 MovementDirection;
     public Transform orientation;
     Rigidbody playerRb;
@@ -85,8 +88,6 @@ public class PlayerController : MonoBehaviour
                 speed--;
             }
         }
-       
-
         if(Input.GetKeyDown(KeyCode.Space))
         {
             health -= 20;
@@ -97,6 +98,8 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.gameOver = true;
         }
+
+        RegenHealth();
     }
 
     void PlayerAttack()
@@ -131,12 +134,15 @@ public class PlayerController : MonoBehaviour
 
     public void SetHealth()
     {
+        // the slider changes as the health decreases or increases
         healthSlider.value = health;
         healthText.text ="" + health;
     }
 
     public void SetMaxHealth()
     {
+        //max health in slider is equal to max health
+        //if max health changes then the sliders max health will also change
         healthSlider.maxValue = maxHealth;
     }
     void Inventory()
@@ -180,6 +186,23 @@ public class PlayerController : MonoBehaviour
         {
             //die
             gameManager.GameOver();
+        }
+    }
+
+    public void RegenHealth()
+    {
+        if(health < maxHealth && timeSinceDamage == 10)
+        {
+            regenCoolDown -= Time.deltaTime;
+            if(regenCoolDown == 0)
+            {
+                health += healthRegen;
+                regenCoolDown = 3;
+                if(health < maxHealth)
+                {
+                    health = maxHealth;
+                }
+            }
         }
     }
 }

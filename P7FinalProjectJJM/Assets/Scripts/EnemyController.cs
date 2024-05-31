@@ -7,11 +7,14 @@ public class EnemyController : MonoBehaviour
     public float enemySpeed;
     public int enemyDamage;
     public float hitCooldown = 5;
+    public int enemyHealth;
+
+    public GameObject[] enemyDrops;
 
     GameManager gManager;
     Rigidbody enemyRb;
 
-
+    public Weapon_Gun gunWeapon;
     private void Awake()
     {
         gManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -49,17 +52,35 @@ public class EnemyController : MonoBehaviour
         MoveToPlayer();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
+    {
+        EnemyDeath();
+    }
+
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Weapon"))
         {
-            Destroy(gameObject);
+            
         }
-    }
+    }*/
 
     IEnumerator stopFollowing()
     {
         gameObject.transform.Translate(Vector3.zero);
         yield return new WaitForSeconds(1);
+    }
+
+    public void EnemyDeath()
+    {
+        if (enemyHealth == 0)
+        {
+            int lootDrop = Random.Range(0, enemyDrops.Length);
+
+            Instantiate(enemyDrops[lootDrop], enemyRb.position, enemyRb.rotation);
+
+
+            Destroy(gameObject);
+        }
     }
 }
