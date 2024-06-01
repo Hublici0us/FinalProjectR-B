@@ -7,6 +7,7 @@ public class Weapon_Gun : MonoBehaviour
     public float bulletSpeed = 25;
     public float fireRate;
     public int damage;
+    public int damageModifier = 10;
 
     public Rigidbody bullet;
     public GameObject gun;
@@ -36,6 +37,7 @@ public class Weapon_Gun : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             EnemyController enemyController = other.GetComponent<EnemyController>();
+            damage += damageModifier;
             enemyController.enemyHealth -= damage;
             Destroy(bullet);
         }

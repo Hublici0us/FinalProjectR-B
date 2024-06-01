@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        EnemyDeath();
+        //EnemyDeath();
     }
 
     /*private void OnTriggerEnter(Collider other)
@@ -71,7 +71,8 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
 
-    public void EnemyDeath()
+    /* uncomment code after weapons work. drops loot for the player.
+     * public void EnemyDeath()
     {
         if (enemyHealth == 0)
         {
@@ -82,5 +83,5 @@ public class EnemyController : MonoBehaviour
 
             Destroy(gameObject);
         }
-    }
+    }*/
 }

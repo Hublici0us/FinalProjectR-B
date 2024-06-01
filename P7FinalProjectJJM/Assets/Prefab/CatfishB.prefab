@@ -120,3 +120,16 @@ MonoBehaviour:
   enemySpeed: 0
   enemyDamage: 0
   hitCooldown: 5
+  enemyHealth: 0
+  enemyDrops:
+  - {fileID: 5198993454991898853, guid: 0bb03489a80bd734489d9e7a6d0d5376, type: 3}
+  - {fileID: 5880208389368849392, guid: d8f270b161261054cb1c1b52fe388291, type: 3}
+  - {fileID: 5445205592179586287, guid: e6fb75ec523ed2e408a08b75e450628e, type: 3}
+  - {fileID: 7037473835818522047, guid: ff70f9e666594924fa5a78079c457bc5, type: 3}
+  - {fileID: 7158844150683735492, guid: 6e9def938f1b7da4b8ba2ef49a69ccc3, type: 3}
+  - {fileID: 7158844150683735492, guid: 6e9def938f1b7da4b8ba2ef49a69ccc3, type: 3}
+  - {fileID: 7158844150683735492, guid: 6e9def938f1b7da4b8ba2ef49a69ccc3, type: 3}
+  - {fileID: 7158844150683735492, guid: 6e9def938f1b7da4b8ba2ef49a69ccc3, type: 3}
+  - {fileID: 7158844150683735492, guid: 6e9def938f1b7da4b8ba2ef49a69ccc3, type: 3}
+  - {fileID: 7158844150683735492, guid: 6e9def938f1b7da4b8ba2ef49a69ccc3, type: 3}
+  gunWeapon: {fileID: 0}
