@@ -15187,7 +15187,7 @@ Animator:
   m_GameObject: {fileID: 1535181028}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ae75406a793468419d87df8d5010451, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -15198,6 +15198,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1535181038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535181028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2763ec150a57944b8f2c9b182e5f21d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1543503990
 GameObject:
   m_ObjectHideFlags: 0
@@ -21177,9 +21189,17 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1426271548329093581, guid: 5142f881222e6c74a935d3311ce97685, type: 3}
+      propertyPath: weapons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426271548329093581, guid: 5142f881222e6c74a935d3311ce97685, type: 3}
       propertyPath: whatIsGround.m_Bits
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 1426271548329093581, guid: 5142f881222e6c74a935d3311ce97685, type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1535181028}
     - target: {fileID: 5983379219198868419, guid: 5142f881222e6c74a935d3311ce97685, type: 3}
       propertyPath: m_TagString
       value: Weapon
@@ -21271,6 +21291,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5983379219198868419, guid: 5142f881222e6c74a935d3311ce97685, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1535181034}
+    - targetCorrespondingSourceObject: {fileID: 5983379219198868419, guid: 5142f881222e6c74a935d3311ce97685, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1535181038}
   m_SourcePrefab: {fileID: 100100000, guid: 5142f881222e6c74a935d3311ce97685, type: 3}
 --- !u!1001 &8022221727669370771
 PrefabInstance:

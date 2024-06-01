@@ -57,13 +57,13 @@ public class EnemyController : MonoBehaviour
         //EnemyDeath();
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    /* private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Weapon"))
         {
-            
+            Destroy(gameObject);
         }
-    }*/
+    } */
 
     IEnumerator stopFollowing()
     {

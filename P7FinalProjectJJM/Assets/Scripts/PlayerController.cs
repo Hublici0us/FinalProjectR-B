@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Weapons")]
-    List<GameObject> weapons;
+    public List<GameObject> weapons;
     private int currentWeapon;
     private bool hasAWeapon;
 
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerRb.freezeRotation = true;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        hasAWeapon = false;
+        hasAWeapon = true;
         SetMaxHealth();
     }
 
@@ -112,6 +112,9 @@ public class PlayerController : MonoBehaviour
                 {
                     //knife attack
                     //reference knife script & use knife attack function.
+
+                    GameObject.Find("Knife").GetComponent<KnifeScript>().KnifeAttack();
+                    
                     
                 }
 
