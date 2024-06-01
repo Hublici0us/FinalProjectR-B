@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public int enemyDamage;
     public float hitCooldown = 5;
     public int enemyHealth;
+    public Slider enemyHealthSlider;
 
     public GameObject[] enemyDrops;
 
@@ -55,6 +57,8 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         //EnemyDeath();
+        EnemyHealthUI();
+        EnemyMaxHealth();
     }
 
     /* private void OnTriggerEnter(Collider other)
@@ -69,6 +73,16 @@ public class EnemyController : MonoBehaviour
     {
         gameObject.transform.Translate(Vector3.zero);
         yield return new WaitForSeconds(1);
+    }
+
+    public void EnemyHealthUI()
+    {
+        enemyHealthSlider.value = enemyHealth;
+    }
+
+    public void EnemyMaxHealth()
+    {
+        enemyHealthSlider.value = enemyHealth;
     }
 
     /* uncomment code after weapons work. drops loot for the player.

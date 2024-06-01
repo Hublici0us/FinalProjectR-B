@@ -12,11 +12,14 @@ public class Weapon_Gun : MonoBehaviour
     public Rigidbody bullet;
     public GameObject gun;
     public BoxCollider bulletCollider;
+
+    private PlayerController playerController;
  
     // Start is called before the first frame update
     void Start()
     {
         bulletCollider = GameObject.Find("Bullet").GetComponent<BoxCollider>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -37,7 +40,7 @@ public class Weapon_Gun : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             EnemyController enemyController = other.GetComponent<EnemyController>();
-            damage += damageModifier;
+            damage += playerController.damageMod;
             enemyController.enemyHealth -= damage;
             Destroy(bullet);
         }

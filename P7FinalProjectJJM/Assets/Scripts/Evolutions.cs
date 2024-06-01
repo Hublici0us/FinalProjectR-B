@@ -42,8 +42,9 @@ public class Evolutions : MonoBehaviour
 
     public void IncreaseDamage()
     {
-        //Access the weapon in player. Player must first get weapon.
-        //gameManager.evolutionPanel.SetActive(false);
+        player.damageMod += 10;
+
+        Debug.Log("Damage Mod: " + player.damageMod);
 
     }
 

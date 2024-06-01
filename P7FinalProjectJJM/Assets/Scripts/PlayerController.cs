@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour
     public int health = 100;
     public int maxHealth = 100;
     public int healthRegen = 1;
-    public int timeSinceDamage = 0;
+    public int damageMod = 0;
     private float regenCoolDown = 3;
+
     Vector3 MovementDirection;
     public Transform orientation;
     Rigidbody playerRb;
@@ -194,14 +195,14 @@ public class PlayerController : MonoBehaviour
 
     public void RegenHealth()
     {
-        if(health < maxHealth && timeSinceDamage == 10)
+        if(health < maxHealth)
         {
             regenCoolDown -= Time.deltaTime;
             if(regenCoolDown == 0)
             {
                 health += healthRegen;
                 regenCoolDown = 3;
-                if(health < maxHealth)
+                if(health >= maxHealth)
                 {
                     health = maxHealth;
                 }
