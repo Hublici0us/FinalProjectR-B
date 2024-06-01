@@ -11,6 +11,9 @@ public class WaveSpawner : MonoBehaviour
     public GameObject[] enemyPrefabs;
 
     private int wavesCompleted = 0;
+    public int enemyDamageMod = 0;
+    public int enemyHpMod = 0;
+
     public TextMeshProUGUI completedWaveText;
     public TextMeshProUGUI enemiesRemainingText;
 
@@ -71,6 +74,8 @@ public class WaveSpawner : MonoBehaviour
             StopCoroutine(WaveSpawn());
             waveNumber += 1;
             wavesCompleted += 1;
+            enemyDamageMod += 10;
+            enemyHpMod += 10;
             manager.evolutionPanel.SetActive(true);
             manager.timerOn = true;
         }

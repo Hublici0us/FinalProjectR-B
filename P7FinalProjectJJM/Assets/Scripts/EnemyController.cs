@@ -13,7 +13,8 @@ public class EnemyController : MonoBehaviour
 
     public GameObject[] enemyDrops;
 
-    GameManager gManager;
+    private GameManager gManager;
+    private WaveSpawner waveSpawner;
     Rigidbody enemyRb;
 
     public Weapon_Gun gunWeapon;
@@ -21,6 +22,7 @@ public class EnemyController : MonoBehaviour
     {
         gManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         enemyRb = GetComponent<Rigidbody>();
+        waveSpawner = GameObject.Find("GameManager").GetComponent<WaveSpawner>();
     }
     void MoveToPlayer()
     {
@@ -78,6 +80,12 @@ public class EnemyController : MonoBehaviour
     public void EnemyHealthUI()
     {
         enemyHealthSlider.value = enemyHealth;
+    }
+
+    public void enemyWaveUpdate()
+    {
+        enemyHealth += waveSpawner.enemyHpMod;
+        enemyDamage += waveSpawner.enemyDamageMod;
     }
 
     public void EnemyMaxHealth()

@@ -7,8 +7,8 @@ public class Weapon_Gun : MonoBehaviour
     public float bulletSpeed = 25;
     public float fireRate;
     public int damage;
-    public int damageModifier = 10;
 
+    //public GameObject weaponHolder; trying to make a weapon holder so you can switch weapons. 
     public Rigidbody bullet;
     public GameObject gun;
     public BoxCollider bulletCollider;
@@ -20,6 +20,7 @@ public class Weapon_Gun : MonoBehaviour
     {
         bulletCollider = GameObject.Find("Bullet").GetComponent<BoxCollider>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+
     }
 
     // Update is called once per frame
@@ -35,7 +36,7 @@ public class Weapon_Gun : MonoBehaviour
         bulletRb.AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
@@ -44,5 +45,7 @@ public class Weapon_Gun : MonoBehaviour
             enemyController.enemyHealth -= damage;
             Destroy(bullet);
         }
-    }
+    }*/
+
+
 }

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public int healthRegen = 1;
     public int damageMod = 0;
     private float regenCoolDown = 3;
+    public bool hasGun = false;
 
     Vector3 MovementDirection;
     public Transform orientation;
