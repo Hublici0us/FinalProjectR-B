@@ -44,14 +44,14 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        PauseGame();
+    { 
+        PauseGame(); //always check for escape to pause game
         if(gameOver == true)
         {
             GameOver();
         }
 
-        if(gameOver == false)
+        if(gameOver == false) //time is always at 1 if game is still going on
         {
             Time.timeScale = 1.0f;
         }

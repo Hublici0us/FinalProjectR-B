@@ -18,7 +18,6 @@ public class Weapon_Gun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bulletCollider = GameObject.Find("Bullet").GetComponent<BoxCollider>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
     }
@@ -32,7 +31,7 @@ public class Weapon_Gun : MonoBehaviour
     public void ShootBullet()
     {
         Rigidbody bulletRb;
-        bulletRb = Instantiate(bullet, gun.transform.position, gun.transform.rotation) as Rigidbody;
+        bulletRb = Instantiate(bullet, playerController.orientation.transform.position, playerController.orientation.transform.rotation) as Rigidbody;
         bulletRb.AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
     }
 

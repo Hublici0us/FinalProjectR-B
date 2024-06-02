@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Weapons")]
     public List<GameObject> weapons;
-    private int currentWeapon;
-    private bool hasAWeapon;
+    public int currentWeapon;
+    public bool hasAWeapon;
 
     private GameManager gameManager;
 
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerRb.freezeRotation = true;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        hasAWeapon = true;
+        hasAWeapon = false;
         SetMaxHealth();
     }
 
@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovement();
         PlayerAttack();
+        CheckForWeapon();
+        WeaponSelection();
     }
 
     void Update()
@@ -120,14 +122,20 @@ public class PlayerController : MonoBehaviour
                     
                 }
 
-                else
+                else if (currentWeapon >= 2)
                 {
                     //gun attack
                     //reference gun script & use the shoot function.
 
-                    Weapon_Gun gunScript; gunScript = GetComponent<Weapon_Gun>();
+                    Weapon_Gun gunScript; gunScript = weapons[2].GetComponent<Weapon_Gun>();
                     gunScript.ShootBullet();
 
+                    
+
+                }
+                else
+                {
+                    return;
                 }
             }
             else if (!hasAWeapon)
@@ -141,7 +149,7 @@ public class PlayerController : MonoBehaviour
     {
         // the slider changes as the health decreases or increases
         healthSlider.value = health;
-        healthText.text ="" + health;
+        healthText.text = ($"{health}");
     }
 
     public void SetMaxHealth()
@@ -150,13 +158,11 @@ public class PlayerController : MonoBehaviour
         //if max health changes then the sliders max health will also change
         healthSlider.maxValue = maxHealth;
     }
-    void Inventory()
-    {
-        
-    }
 
     void WeaponSelection()
     {
+        //if you click 1, change to the first weapon, click 2, the second weapon, etc..
+
         if (Input.GetKeyDown(KeyCode.Alpha1) && weapons[1] != null)
         {
             ChangeWeapon(1);
@@ -175,7 +181,8 @@ public class PlayerController : MonoBehaviour
 
     void ChangeWeapon(int weapon)
     {
-        weapon = currentWeapon;
+        weapons[currentWeapon].gameObject.SetActive(false);
+        currentWeapon = weapon;
         for (int i = 0; i < weapons.Count; i++) {
             if (i == weapon)
             {
@@ -209,5 +216,37 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    void CheckForWeapon()
+    {
+        if (hasAWeapon == true)
+        {
+            return;
+        }
+        else
+        {
+            if (weapons.Count < 1)
+            {
+                return;
+            }
+
+            if (weapons.Count >= 1)
+            {
+                hasAWeapon = true;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    { /*
+        if (other.CompareTag("KnifePickup"))
+        {
+            if (GameObject.Find("Knife").gameObject.activeInHierarchy == false)
+            {
+                GameObject.Find("Knife").gameObject.SetActive(true);
+                weapons.Add(GameObject.Find("Knife"));
+            }
+        } */
     }
 }
