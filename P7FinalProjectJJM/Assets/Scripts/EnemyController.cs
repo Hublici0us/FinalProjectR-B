@@ -11,18 +11,17 @@ public class EnemyController : MonoBehaviour
     public int enemyHealth;
     public Slider enemyHealthSlider;
 
-    public GameObject[] enemyDrops;
-
+    private PlayerController player;
     private GameManager gManager;
     private WaveSpawner waveSpawner;
     Rigidbody enemyRb;
 
-    public Weapon_Gun gunWeapon;
     private void Awake()
     {
         gManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         enemyRb = GetComponent<Rigidbody>();
         waveSpawner = GameObject.Find("GameManager").GetComponent<WaveSpawner>();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
     void MoveToPlayer()
     {
@@ -54,12 +53,13 @@ public class EnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         MoveToPlayer();
+        EnemyDeath();
+        EnemyHealthUI();
     }
 
-    private void Update()
+    private void Start()
     {
-        //EnemyDeath();
-        EnemyHealthUI();
+
         EnemyMaxHealth();
     }
 
@@ -93,17 +93,20 @@ public class EnemyController : MonoBehaviour
         enemyHealthSlider.value = enemyHealth;
     }
 
-    /* uncomment code after weapons work. drops loot for the player.
-     * public void EnemyDeath()
+    // uncomment code after weapons work. kills enemy
+      public void EnemyDeath()
     {
         if (enemyHealth == 0)
         {
-            int lootDrop = Random.Range(0, enemyDrops.Length);
-
-            Instantiate(enemyDrops[lootDrop], enemyRb.position, enemyRb.rotation);
-
-
             Destroy(gameObject);
         }
-    }*/
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            enemyHealth -= player.damageMod;
+        }
+    }
 }

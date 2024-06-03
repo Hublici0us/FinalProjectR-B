@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Weapon_Gun : MonoBehaviour
 {
-    public float bulletSpeed = 25;
+    public float bulletSpeed = 100;
     public float fireRate;
-    public int damage;
 
     //public GameObject weaponHolder; trying to make a weapon holder so you can switch weapons. 
-    public Rigidbody bullet;
-    public GameObject gun;
+    public GameObject bullet;
+    public Transform crossHairs;
     public BoxCollider bulletCollider;
 
     private PlayerController playerController;
@@ -30,9 +29,11 @@ public class Weapon_Gun : MonoBehaviour
 
     public void ShootBullet()
     {
-        Rigidbody bulletRb;
-        bulletRb = Instantiate(bullet, playerController.orientation.transform.position, playerController.orientation.transform.rotation) as Rigidbody;
-        bulletRb.AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
+        GameObject bangBullet = Instantiate(bullet);
+        bangBullet.transform.position = crossHairs.position;
+        bangBullet.transform.rotation = bullet.transform.rotation;
+
+        bangBullet.GetComponent<Rigidbody>().AddForce(crossHairs.forward * bulletSpeed, ForceMode.Impulse);
     }
 
     /*private void OnTriggerEnter(Collider other)

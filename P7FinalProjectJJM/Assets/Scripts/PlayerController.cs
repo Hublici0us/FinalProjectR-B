@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public int health = 100;
     public int maxHealth = 100;
     public int healthRegen = 1;
-    public int damageMod = 0;
+    public int damageMod = 25;
     private float regenCoolDown = 3;
     public bool hasGun = false;
 
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public bool hasAWeapon;
 
     private GameManager gameManager;
+    private ChooseYourWeapon weaponChoose;
 
     private void Awake()
     {
@@ -53,7 +54,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerRb.freezeRotation = true;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        hasAWeapon = false;
+        hasAWeapon = true;
+        weaponChoose = GameObject.Find("WeaponHolder").GetComponent<ChooseYourWeapon>();
         SetMaxHealth();
     }
 
@@ -73,11 +75,8 @@ public class PlayerController : MonoBehaviour
         PlayerMovement();
         PlayerAttack();
         CheckForWeapon();
-        WeaponSelection();
-    }
-
-    void Update()
-    {
+        SetHealth();
+        RegenHealth();
         // ground checking: sends a raycast (invisible arrow tracker thingy) straight down from player position, if detects layer "whatIsGround" then applies drag.
         grounded = Physics.Raycast(gameObject.transform.position, Vector3.down, playerHeight + 0.2f, whatIsGround);
 
@@ -92,19 +91,10 @@ public class PlayerController : MonoBehaviour
                 speed--;
             }
         }
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            health -= 20;
-        }
-        SetHealth();
 
-        if(health <= 0)
-        {
-            gameManager.gameOver = true;
-        }
-
-        RegenHealth();
     }
+
+
 
     void PlayerAttack()
     {
@@ -112,7 +102,7 @@ public class PlayerController : MonoBehaviour
         {
             if (hasAWeapon)
             {
-                if (currentWeapon == 1)
+                if (weaponChoose.pickWeapon == 0)
                 {
                     //knife attack
                     //reference knife script & use knife attack function.
@@ -122,7 +112,7 @@ public class PlayerController : MonoBehaviour
                     
                 }
 
-                else if (currentWeapon >= 2)
+                else if (weaponChoose.pickWeapon >= 1)
                 {
                     //gun attack
                     //reference gun script & use the shoot function.
@@ -159,37 +149,9 @@ public class PlayerController : MonoBehaviour
         healthSlider.maxValue = maxHealth;
     }
 
-    void WeaponSelection()
-    {
-        //if you click 1, change to the first weapon, click 2, the second weapon, etc..
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && weapons[1] != null)
-        {
-            ChangeWeapon(1);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && weapons[2] != null)
-        {
-            ChangeWeapon(2);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && weapons[3] != null)
-        {
-            ChangeWeapon(3);
-        }
-    }
-
-    void ChangeWeapon(int weapon)
-    {
-        weapons[currentWeapon].gameObject.SetActive(false);
-        currentWeapon = weapon;
-        for (int i = 0; i < weapons.Count; i++) {
-            if (i == weapon)
-            {
-                weapons[i].gameObject.SetActive(true);
-            }
-        }
-    }
 
     public void TakeDamage(int dmg)
     {
@@ -203,22 +165,24 @@ public class PlayerController : MonoBehaviour
 
     public void RegenHealth()
     {
+        // regenerate health
         if(health < maxHealth)
         {
             regenCoolDown -= Time.deltaTime;
-            if(regenCoolDown == 0)
+            if(regenCoolDown <= 0)
             {
                 health += healthRegen;
                 regenCoolDown = 3;
-                if(health >= maxHealth)
-                {
-                    health = maxHealth;
-                }
             }
+        }
+        // sets health back to the max if it goes above
+        if(health > maxHealth)
+        {
+            health = maxHealth;
         }
     }
 
-    void CheckForWeapon()
+    /*void CheckForWeapon()
     {
         if (hasAWeapon == true)
         {
@@ -236,7 +200,7 @@ public class PlayerController : MonoBehaviour
                 hasAWeapon = true;
             }
         }
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     { /*

@@ -43,15 +43,15 @@ public class WaveSpawner : MonoBehaviour
         {
             for(int i = 0; i < waveNumber; i++)
             {
-                while(enemiesInScene <= enemyLimit)
+                while(enemiesInScene < enemyLimit)
                 {
                     SpawnEnemies();
                     enemiesInScene++;
                     enemiesRemainingText.text = "Enemies Remaining: " + enemiesInScene;
                     enemyLimit *= waveNumber;
-                    yield return new WaitForSeconds(2f);
+                    
                 }
-                
+                yield return new WaitForSeconds(2f);
             }
         }
     }
