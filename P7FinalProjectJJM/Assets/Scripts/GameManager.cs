@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     //WaveManagement
     public bool timerOn;
-    private float timeTillWave = 31;
+    private float timeTillWave = 10;
     public bool firstWave = true;
     
     // Start is called before the first frame update
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1.0f;
         }
-
+        
         CountDownToWave();
     }
 

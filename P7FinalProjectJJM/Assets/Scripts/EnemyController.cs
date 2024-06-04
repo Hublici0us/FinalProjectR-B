@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
     {
         // code to move to player
         transform.LookAt(GameObject.Find("Player").transform);
-        transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+        
 
         //a timer for the hit cooldown so enemy cant instantly kill player
         hitCooldown -= Time.deltaTime;
@@ -43,12 +43,16 @@ public class EnemyController : MonoBehaviour
                 GameObject.Find("Player").GetComponent<PlayerController>().TakeDamage(enemyDamage);
                 hitCooldown = 5;
                 player.SetHealth();
-                stopFollowing();
+                
             }
             else
             {
                 return;
             }
+        }
+        else
+        {
+            transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
         }
     }
 
@@ -100,12 +104,15 @@ public class EnemyController : MonoBehaviour
     {
         if (enemyHealth <= 0)
         {
+            waveSpawner.enemiesInScene--;
+            waveSpawner.enemiesRemainingText.text = ("Enemies Remaining: " + waveSpawner.enemiesInScene);
             Destroy(gameObject);
         }
     }
 
-    public void Damaged()
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Weapon"))
         enemyHealth -= player.damageMod;
     }
 }

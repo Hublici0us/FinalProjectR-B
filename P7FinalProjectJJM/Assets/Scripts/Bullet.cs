@@ -10,23 +10,29 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         bullet = GetComponent<BoxCollider>();
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        transform.Translate(Vector3.forward * Time.deltaTime * 20);
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
 
-        if ((collision.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyComponent)))
+      /*  if ((collision.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyComponent)))
         {
             enemyComponent.Damaged();
         }
-        Destroy(bullet);
+        Destroy(bullet); */
 
     }
 }

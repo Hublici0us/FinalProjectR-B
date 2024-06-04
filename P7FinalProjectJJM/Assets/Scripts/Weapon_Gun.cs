@@ -10,8 +10,11 @@ public class Weapon_Gun : MonoBehaviour
     //public GameObject weaponHolder; trying to make a weapon holder so you can switch weapons. 
     public GameObject bullet;
     public Transform crossHairs;
+    public Transform bullethole;
     private PlayerController playerController;
- 
+
+    public Transform bulletTrajectory;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +33,9 @@ public class Weapon_Gun : MonoBehaviour
         if (fireRate <=0)
         {
             GameObject bangBullet = Instantiate(bullet);
-            bangBullet.transform.position = crossHairs.position;
+            bangBullet.transform.position = bullethole.position;
 
-            bangBullet.GetComponent<Rigidbody>().AddForce(crossHairs.forward * bulletSpeed);
+            bangBullet.GetComponent<Rigidbody>().AddForce(bulletTrajectory.forward * bulletSpeed);
 
             fireRate = 1;
             Destroy(bangBullet, 5);

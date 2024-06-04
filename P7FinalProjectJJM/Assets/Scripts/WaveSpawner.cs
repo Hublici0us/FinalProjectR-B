@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class WaveSpawner : MonoBehaviour
 {
-    private int enemiesInScene = 0;
+    public int enemiesInScene = 0;
     private int enemyLimit = 5;
+    private int enemiesSpawned;
+    public bool evoOn;
     public GameObject[] spawningPoints;
     public GameObject[] enemyPrefabs;
 
@@ -30,7 +33,7 @@ public class WaveSpawner : MonoBehaviour
     void Update()
     {
         completedWaveText.text = "Waves Completed: " + wavesCompleted;
-        WaveEnd();
+        
     }
 
     public void WaveStart()
@@ -43,42 +46,50 @@ public class WaveSpawner : MonoBehaviour
         {
             for(int i = 0; i < waveNumber; i++)
             {
-                while(enemiesInScene < enemyLimit)
+                while (enemiesInScene < enemyLimit && enemiesSpawned < enemyLimit)
                 {
                     SpawnEnemies();
                     enemiesInScene++;
                     enemiesRemainingText.text = "Enemies Remaining: " + enemiesInScene;
-                    enemyLimit *= waveNumber;
+                    
                     
                 }
                 yield return new WaitForSeconds(2f);
+                WaveEnd();
             }
         }
     }
 
     void SpawnEnemies()
     {
+
+
         int spawnPoint = Random.Range(0, spawningPoints.Length);
 
         int randomEnemy = Random.Range(0, enemyPrefabs.Length);
 
-        
+        enemiesSpawned++;
 
         Instantiate(enemyPrefabs[randomEnemy], spawningPoints[spawnPoint].transform.position, enemyPrefabs[randomEnemy].transform.rotation); 
     }
 
     public void WaveEnd()
     {
-        if(enemiesInScene == 0 && manager.firstWave == false)
+        if (enemiesInScene <=0)
         {
             StopCoroutine(WaveSpawn());
             waveNumber += 1;
             wavesCompleted += 1;
             enemyDamageMod += 10;
             enemyHpMod += 10;
-            manager.evolutionPanel.SetActive(true);
+            enemiesSpawned = 0;
+            manager.evolutionPanel.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
-            manager.timerOn = true;
+            //manager.timerOn = true;
+        }
+        else 
+        {
+
         }
     }
 }
