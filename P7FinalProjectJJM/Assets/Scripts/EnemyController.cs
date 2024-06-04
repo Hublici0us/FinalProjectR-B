@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     private GameManager gManager;
     private WaveSpawner waveSpawner;
     Rigidbody enemyRb;
+    private BoxCollider enemyCollider;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class EnemyController : MonoBehaviour
         enemyRb = GetComponent<Rigidbody>();
         waveSpawner = GameObject.Find("GameManager").GetComponent<WaveSpawner>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        enemyCollider = GetComponent<BoxCollider>();
     }
     void MoveToPlayer()
     {
@@ -40,7 +42,7 @@ public class EnemyController : MonoBehaviour
             {
                 GameObject.Find("Player").GetComponent<PlayerController>().TakeDamage(enemyDamage);
                 hitCooldown = 5;
-                gManager.UpdateHealthUI();
+                player.SetHealth();
                 stopFollowing();
             }
             else
@@ -94,19 +96,16 @@ public class EnemyController : MonoBehaviour
     }
 
     // uncomment code after weapons work. kills enemy
-      public void EnemyDeath()
+    public void EnemyDeath()
     {
-        if (enemyHealth == 0)
+        if (enemyHealth <= 0)
         {
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Damaged()
     {
-        if (other.CompareTag("Weapon"))
-        {
-            enemyHealth -= player.damageMod;
-        }
+        enemyHealth -= player.damageMod;
     }
 }

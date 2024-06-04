@@ -6,7 +6,6 @@ public class Bullet : MonoBehaviour
 {
     public BoxCollider bullet;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -16,14 +15,18 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    /*public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
 
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if ((collision.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyComponent)))
+        {
+            enemyComponent.Damaged();
         }
-    } bruh why this so hard to code. im so tired*/
+        Destroy(bullet);
+
+    }
 }

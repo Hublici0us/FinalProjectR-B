@@ -21,10 +21,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Enemy Related")]
     public GameObject[] enemies;
-    private int enemiesToSpawn = 5;
+   
     private WaveSpawner waveSpawner;
 
-    //WaveManagement(I don't know how to do the header things properly)
+    //WaveManagement
     public bool timerOn;
     private float timeTillWave = 31;
     public bool firstWave = true;
@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         timerOn = true;
         waveSpawner = GameObject.Find("GameManager").GetComponent<WaveSpawner>();
+        //to make sure evolution panel does not turn on at the beginning
         firstWave = true;
     }
 
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
         }
     }
-
+    //resume the game
     public void ReturnButton()
     {
         pauseEmpty.SetActive(false);
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
     }
-
+    //gameover screen becomes active
     public void GameOver()
     {
         gameOverEmpty.SetActive(true);
@@ -85,35 +86,13 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    /*IEnumerator EnemySpawner()
-    {
-        while (true)
-        {
-            for (int i = 0; i < enemiesToSpawn; i++)
-            {
-                SpawnEnemies();
-                yield return new WaitForSeconds(1f);
-            }
-
-            evolutionPanel.SetActive(true );
-
-
-        }
-    }*/
-
-    /*void SpawnEnemies()
-    {
-        int enemyIndex = Random.Range(0, enemies.Length);
-
-      //  Instantiate(enemies[enemyIndex], Vector3.zero, Quaternion.identity);
-    }*/
-
+    /*
     public void UpdateHealthUI()
     {
         playerController.healthSlider.value = playerController.health;
         playerController.healthText.text = ($"{playerController.health}");
-    }
-
+    }*/
+    //countdown timer that shows the time left till the next wave
     public void CountDownToWave()
     {
         if(timerOn == true)

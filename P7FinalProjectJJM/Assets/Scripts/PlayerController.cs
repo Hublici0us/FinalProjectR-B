@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovement();
         PlayerAttack();
-        CheckForWeapon();
         SetHealth();
         RegenHealth();
         // ground checking: sends a raycast (invisible arrow tracker thingy) straight down from player position, if detects layer "whatIsGround" then applies drag.

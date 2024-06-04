@@ -77,6 +77,7 @@ public class WaveSpawner : MonoBehaviour
             enemyDamageMod += 10;
             enemyHpMod += 10;
             manager.evolutionPanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
             manager.timerOn = true;
         }
     }
